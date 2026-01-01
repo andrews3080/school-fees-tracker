@@ -6,11 +6,18 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+    const studentId = params?.id;
+
+    if (!studentId) {
+      return NextResponse.json(
+        { error: "Missing student ID" },
+        { status: 400 }
+      );
+    }
 
     const result = await pool.query(
       "SELECT * FROM students WHERE id = $1",
-      [id]
+      [studentId]
     );
 
     if (result.rows.length === 0) {
@@ -21,8 +28,8 @@ export async function GET(
     }
 
     return NextResponse.json(result.rows[0]);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     return NextResponse.json(
       { error: "Server error" },
       { status: 500 }

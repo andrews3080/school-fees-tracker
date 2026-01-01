@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
+
 export default function PaymentHistory() {
   const params = useParams();
   const id = params?.id as string;
@@ -21,7 +22,11 @@ export default function PaymentHistory() {
 }, [id]);
 
 
+
+
+
   return (
+    
     <div>
       <a
         href={`/payments/add?studentId=${id}`}
@@ -128,6 +133,15 @@ export default function PaymentHistory() {
           </tbody>
         </table>
       )}
+      
     </div>
+    
   );
+  
+  
+
+  
+  
+
 }
+
